@@ -21,7 +21,6 @@ public class AsteroidController : MonoBehaviour
         if (controller != null) gamecontroller = controller.GetComponent<GameController>();
         else Debug.Log("Can't find game controller");
 
-        //set asteroid moving speed higher with wave level
         speed = 5.0f;
 
         //shoot asteroid towards player
@@ -33,31 +32,26 @@ public class AsteroidController : MonoBehaviour
         //randomize asteroid's rotation speed and angle
         rotationSpeed = Random.Range(1.0f, 6.0f);
         rb.angularVelocity = Random.insideUnitSphere * rotationSpeed;
-
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-         if (other.tag == "LaserBolt")
-         {
-             DestroyObject(other.gameObject);
-             DestroyObject(gameObject);
-             Instantiate(explosion, transform.position, transform.rotation);
-             gamecontroller.UpdateExperience(1);
-         }
+        if (other.tag == "LaserBolt")
+        {
+            DestroyObject(other.gameObject);
+            DestroyObject(gameObject);
+            Instantiate(explosion, transform.position, transform.rotation);
+            gamecontroller.UpdateExperience(1);
+        }
 
         if (other.tag == "Player")
-         {
-             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-             DestroyObject(gameObject);
-             DestroyObject(other.gameObject);
-             gamecontroller.GameOver();
-         }
+        {
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+            DestroyObject(gameObject);
+            DestroyObject(other.gameObject);
+            gamecontroller.GameOver();
+        }
 
     }
-
-
 }
 
