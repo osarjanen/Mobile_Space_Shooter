@@ -12,8 +12,6 @@ public class AsteroidController : MonoBehaviour
     private GameObject mAsteroid;
     private GameObject player;
 
-    //.......
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
